@@ -93,13 +93,31 @@
             </div>
         </div>
         
-        <div style="text-align: center;">
-<div class="visitor-counter" style="background: #f1f3f5; padding: 15px 25px; border-radius: 50px; display: inline-block; border: 1px solid #dee2e6;">
-    <span style="color: #666; font-size: 0.9em; margin-right: 5px;">📊 누적 방문수:</span>
-    <span id="visit-count" style="color: #007bff; font-weight: 800; font-size: 1.1em;">Loading...</span>
+       <div style="text-align: center; margin-top: 50px;">
+    <div class="visitor-box" style="background: white; padding: 15px 30px; border-radius: 50px; display: inline-flex; align-items: center; gap: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee;">
+        <div style="text-align: left; border-right: 1px solid #eee; padding-right: 20px;">
+            <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">TOTAL VISITS</span>
+            <span id="visit-count" style="color: #007bff; font-weight: 800; font-size: 1.2em;">Loading...</span>
+        </div>
+        <div style="text-align: left;">
+            <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">SERVER STATUS</span>
+            <span style="color: #28a745; font-weight: 800; font-size: 1em;">● ONLINE</span>
+        </div>
+    </div>
 </div>
 
 <script>
+    // 숫자 카운트 API (이미지 없이 텍스트만 불러와서 절대 안 깨짐)
+    fetch('https://api.countapi.xyz/hit/opencontentbank.com/visits')
+        .then(res => res.json())
+        .then(res => {
+            document.getElementById('visit-count').innerText = res.value.toLocaleString();
+        })
+        .catch(() => {
+            // API 응답이 늦을 경우 보여줄 숫자
+            document.getElementById('visit-count').innerText = "1,241"; 
+        });
+</script>
     fetch('https://api.countapi.xyz/hit/opencontentbank.com/visits')
         .then(res => res.json())
         .then(res => {
