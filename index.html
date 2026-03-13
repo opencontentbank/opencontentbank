@@ -89,11 +89,11 @@
             </div>
         </div>
 
-        <div class="status-section">
+<div class="status-section">
             <div class="visitor-box">
                 <div style="border-right: 1px solid #eee; padding-right: 30px; text-align: left;">
                     <span class="status-label">TOTAL VISITS</span>
-                    <span id="visit-count" class="status-value">0</span>
+                    <span id="busuanzi_value_site_pv" class="status-value">0</span>
                 </div>
                 <div style="text-align: left;">
                     <span class="status-label">SERVER STATUS</span>
@@ -101,55 +101,25 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer class="footer">
-        © 2026 Open Content Bank. Powered by Gemini.
-    </footer>
-
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
     <script>
-        // 1. 검색 기능
+        // 검색 기능 (기존과 동일)
         function filterContents() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
             const fileItems = document.getElementsByClassName('file-item');
             const cards = document.getElementsByClassName('card');
-            
             for (let i = 0; i < fileItems.length; i++) {
                 let txtValue = fileItems[i].getAttribute('data-name');
                 fileItems[i].style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
             }
-            
             for (let j = 0; j < cards.length; j++) {
                 const visibleFiles = cards[j].querySelectorAll('.file-item:not([style*="display: none"])');
                 cards[j].style.display = visibleFiles.length > 0 ? "" : "none";
             }
         }
-
-        // 2. 숫자가 촤르륵 올라가는 애니메이션 (이미지 없이 순수 코드로 작동)
-        function animateCount(id, target) {
-            let current = 0;
-            const element = document.getElementById(id);
-            const duration = 1000; // 1초 동안 실행
-            const stepTime = 20;
-            const steps = duration / stepTime;
-            const increment = target / steps;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.innerText = Math.floor(target).toLocaleString();
-                    clearInterval(timer);
-                } else {
-                    element.innerText = Math.floor(current).toLocaleString();
-                }
-            }, stepTime);
-        }
-
-        // 페이지 로드되면 카운트 시작 (원하시는 숫자로 설정하세요)
-        window.onload = () => {
-            animateCount('visit-count', 1248); 
-        };
     </script>
 </body>
 </html>
