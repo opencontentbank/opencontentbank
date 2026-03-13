@@ -10,27 +10,30 @@
         .hero h1 { font-size: 3em; margin-bottom: 10px; letter-spacing: -1px; }
         .hero p { font-size: 1.2em; opacity: 0.9; margin-bottom: 30px; }
         
+        /* 검색창 */
         .search-box { max-width: 600px; margin: 0 auto; display: flex; background: white; border-radius: 50px; padding: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .search-box input { flex: 1; border: none; padding: 15px 25px; font-size: 1.1em; border-radius: 50px; outline: none; }
         .search-box button { background: #ff9800; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .search-box button:hover { background: #e68a00; }
-
+        
         .container { max-width: 1100px; margin: -40px auto 50px; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 6px solid #0056b3; }
+        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 6px solid #0056b3; transition: 0.3s; }
         .card h3 { margin-top: 0; color: #0056b3; display: flex; align-items: center; gap: 10px; }
-        .card p { color: #666; font-size: 0.95em; line-height: 1.6; margin-bottom: 20px; }
         
         .file-list { list-style: none; padding: 0; margin: 0; }
-        .file-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
         .file-item:last-child { border-bottom: none; }
         .file-name { font-weight: 500; font-size: 0.95em; }
         
-        .btn-sm { text-decoration: none; background: #f0f7ff; color: #007bff; padding: 5px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; transition: 0.2s; }
+        .btn-sm { text-decoration: none; background: #f0f7ff; color: #007bff; padding: 6px 15px; border-radius: 6px; font-size: 0.85em; font-weight: bold; transition: 0.2s; }
         .btn-sm:hover { background: #007bff; color: white; }
+        .btn-disabled { color: #ccc; cursor: default; background: #f9f9f9; }
 
         .footer { text-align: center; padding: 50px; color: #aaa; font-size: 0.9em; }
+        
+        /* 검색 결과 없음 처리 */
+        .no-result { display: none; text-align: center; padding: 50px; font-size: 1.2em; color: #888; }
     </style>
 </head>
 <body>
@@ -39,37 +42,35 @@
         <h1>📂 Open Content Bank</h1>
         <p>누구나 쉽게, 무료로 찾아 이용할 수 있는 열린 자료실</p>
         <div class="search-box">
-            <input type="text" placeholder="필요한 자료를 검색해보세요">
-            <button>검색</button>
+            <input type="text" id="searchInput" onkeyup="filterContents()" placeholder="찾으시는 자료를 입력하세요 (예: 배경화면, 기획서)">
+            <button onclick="filterContents()">검색</button>
         </div>
     </div>
 
     <div class="container">
-        <div class="grid">
+        <div id="contentGrid" class="grid">
             <div class="card">
                 <h3>📄 문서 양식</h3>
-                <p>실무에서 바로 쓰는 깔끔한 양식들</p>
                 <ul class="file-list">
-                    <li class="file-item">
+                    <li class="file-item" data-name="프로젝트 기획서 양식 문서">
                         <span class="file-name">프로젝트 기획서 (Txt)</span>
                         <a href="template.txt" class="btn-sm" download>다운로드</a>
                     </li>
-                    <li class="file-item">
-                        <span class="file-name">오늘의 할 일 체크리스트</span>
-                        <a href="#" class="btn-sm" style="color:#ccc;">준비중</a>
+                    <li class="file-item" data-name="오늘의 할일 체크리스트 TO DO LIST">
+                        <span class="file-name">데일리 체크리스트</span>
+                        <a href="#" class="btn-sm btn-disabled">준비중</a>
                     </li>
                 </ul>
             </div>
             
             <div class="card">
                 <h3>🖼️ 디자인 소스</h3>
-                <p>고퀄리티 배경화면 및 이미지 자료</p>
                 <ul class="file-list">
-                    <li class="file-item">
+                    <li class="file-item" data-name="네온 우주 배경화면 모바일 잠금화면 OLED">
                         <span class="file-name">네온 우주 배경화면</span>
                         <a href="wallpaper1.png" class="btn-sm" download>다운로드</a>
                     </li>
-                    <li class="file-item">
+                    <li class="file-item" data-name="감성 데스크테리어 배경화면 책상 따뜻한">
                         <span class="file-name">감성 데스크테리어</span>
                         <a href="wallpaper2.png" class="btn-sm" download>다운로드</a>
                     </li>
@@ -78,20 +79,53 @@
             
             <div class="card">
                 <h3>💡 참고 자료</h3>
-                <p>영감을 주는 팁과 가이드 모음</p>
                 <ul class="file-list">
-                    <li class="file-item">
-                        <span class="file-name">AI 질문 잘하는 법(준비중)</span>
-                        <a href="#" class="btn-sm" style="color:#ccc;">보기</a>
+                    <li class="file-item" data-name="AI 질문 잘하는 법 프롬프트 엔지니어링 꿀팁">
+                        <span class="file-name">AI 질문 잘하는 법</span>
+                        <a href="#" class="btn-sm btn-disabled">보기</a>
                     </li>
                 </ul>
             </div>
         </div>
+        <div id="noResult" class="no-result">찾으시는 자료가 없습니다. 다른 검색어를 입력해 보세요!</div>
     </div>
 
     <div class="footer">
-        © 2026 Open Content Bank. Designed with Gemini.
+        © 2026 Open Content Bank. Powered by Gemini.
     </div>
 
+    <script>
+        function filterContents() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const fileItems = document.getElementsByClassName('file-item');
+            const cards = document.getElementsByClassName('card');
+            let hasVisibleItem = false;
+
+            // 각 파일 아이템 확인
+            for (let i = 0; i < fileItems.length; i++) {
+                let txtValue = fileItems[i].getAttribute('data-name');
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    fileItems[i].style.display = "";
+                    hasVisibleItem = true;
+                } else {
+                    fileItems[i].style.display = "none";
+                }
+            }
+
+            // 내용이 하나도 없는 카드는 숨기기
+            for (let j = 0; j < cards.length; j++) {
+                const visibleFiles = cards[j].querySelectorAll('.file-item[style="display: px;"], .file-item:not([style*="display: none"])');
+                if (visibleFiles.length > 0) {
+                    cards[j].style.display = "";
+                } else {
+                    cards[j].style.display = "none";
+                }
+            }
+
+            // 결과 없음 메시지 제어
+            document.getElementById('noResult').style.display = hasVisibleItem ? "none" : "block";
+        }
+    </script>
 </body>
 </html>
