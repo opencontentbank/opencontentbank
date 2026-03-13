@@ -1,52 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta name="description" content="누구나 쉽게 무료로 이용하는 고퀄리티 모바일 배경화면, 문서 양식, 실무 팁 저장소 - Open Content Bank">
-    <meta name="keywords" content="무료 배경화면, 기획서 양식, 무료 자료실, 오픈 콘텐츠 뱅크, 모바일 잠금화면">
-    <meta name="google-site-verification" content="dH8iMoFF7Xd-60CIdpzyTsCta-uHzb4ltdvIkhmgvUc" />
-    <meta name="naver-site-verification" content="57dd55a04ed709d2fc914eb56b5e659de0e29579" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Content Bank</title>
+    
+    <meta name="google-site-verification" content="구글코드를여기에">
+    <meta name="naver-site-verification" content="네이버코드를여기에">
+    
+    <title>Open Content Bank - 무료 자료 저장소</title>
+    <meta name="description" content="고퀄리티 배경화면, 실무 문서 양식, 꿀팁을 무료로 공유하는 오픈 콘텐츠 뱅크입니다.">
+    
     <style>
-        body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
-        .hero { background: linear-gradient(135deg, #0056b3 0%, #00aaff 100%); color: white; text-align: center; padding: 80px 20px; }
-        .hero h1 { font-size: 3em; margin-bottom: 10px; letter-spacing: -1px; }
-        .hero p { font-size: 1.2em; opacity: 0.9; margin-bottom: 30px; }
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; overflow-x: hidden; }
+        
+        /* 헤더 & 로고 */
+        .header { background: white; padding: 15px 0; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        .logo-img { height: 50px; cursor: pointer; }
+
+        .hero { background: linear-gradient(135deg, #0056b3 0%, #00aaff 100%); color: white; text-align: center; padding: 60px 20px; }
+        .hero h1 { font-size: 2.8em; margin-bottom: 15px; animation: fadeInUp 0.8s ease; }
         
         /* 검색창 */
-        .search-box { max-width: 600px; margin: 0 auto; display: flex; background: white; border-radius: 50px; padding: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .search-box { max-width: 600px; margin: 0 auto; display: flex; background: white; border-radius: 50px; padding: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; }
+        .search-box:focus-within { transform: scale(1.03); }
         .search-box input { flex: 1; border: none; padding: 15px 25px; font-size: 1.1em; border-radius: 50px; outline: none; }
-        .search-box button { background: #ff9800; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        
-        .container { max-width: 1100px; margin: -40px auto 50px; padding: 0 20px; }
+        .search-box button { background: #ff9800; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; }
+
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 6px solid #0056b3; transition: 0.3s; }
-        .card h3 { margin-top: 0; color: #0056b3; display: flex; align-items: center; gap: 10px; }
+        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s; animation: fadeInUp 1s ease; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         
-        .file-list { list-style: none; padding: 0; margin: 0; }
-        .file-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
-        .file-item:last-child { border-bottom: none; }
-        .file-name { font-weight: 500; font-size: 0.95em; }
-        
-        .btn-sm { text-decoration: none; background: #f0f7ff; color: #007bff; padding: 6px 15px; border-radius: 6px; font-size: 0.85em; font-weight: bold; transition: 0.2s; }
+        .file-list { list-style: none; padding: 0; margin: 20px 0 0; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }
+        .btn-sm { text-decoration: none; background: #eef6ff; color: #007bff; padding: 8px 18px; border-radius: 8px; font-size: 0.85em; font-weight: 700; transition: 0.3s; }
         .btn-sm:hover { background: #007bff; color: white; }
-        .btn-disabled { color: #ccc; cursor: default; background: #f9f9f9; }
+
+        /* 방문자수 표시기 */
+        .visitor-counter { margin-top: 50px; padding: 20px; background: #eee; border-radius: 10px; display: inline-block; font-size: 0.9em; color: #666; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .footer { text-align: center; padding: 50px; color: #aaa; font-size: 0.9em; }
-        
-        /* 검색 결과 없음 처리 */
-        .no-result { display: none; text-align: center; padding: 50px; font-size: 1.2em; color: #888; }
     </style>
 </head>
 <body>
 
+<div class="header">
+    <a href="/" style="text-decoration: none; color: #007bff; font-weight: 900; font-size: 1.5rem;">
+        📂 OPEN CONTENT BANK
+    </a>
+</div>
+
     <div class="hero">
-        <h1>📂 Open Content Bank</h1>
-        <p>누구나 쉽게, 무료로 찾아 이용할 수 있는 열린 자료실</p>
+        <h1>나만의 자료 저장소</h1>
+        <p>무료 고화질 배경화면부터 실무 양식까지 한곳에</p>
         <div class="search-box">
-            <input type="text" id="searchInput" onkeyup="filterContents()" placeholder="찾으시는 자료를 입력하세요 (예: 배경화면, 기획서)">
+            <input type="text" id="searchInput" onkeyup="filterContents()" placeholder="찾으시는 자료를 입력하세요">
             <button onclick="filterContents()">검색</button>
         </div>
     </div>
@@ -56,13 +71,9 @@
             <div class="card">
                 <h3>📄 문서 양식</h3>
                 <ul class="file-list">
-                    <li class="file-item" data-name="프로젝트 기획서 양식 문서">
+                    <li class="file-item" data-name="기획서 양식 문서">
                         <span class="file-name">프로젝트 기획서 (Txt)</span>
                         <a href="template.txt" class="btn-sm" download>다운로드</a>
-                    </li>
-                    <li class="file-item" data-name="오늘의 할일 체크리스트 TO DO LIST">
-                        <span class="file-name">데일리 체크리스트</span>
-                        <a href="#" class="btn-sm btn-disabled">준비중</a>
                     </li>
                 </ul>
             </div>
@@ -70,28 +81,23 @@
             <div class="card">
                 <h3>🖼️ 디자인 소스</h3>
                 <ul class="file-list">
-                    <li class="file-item" data-name="네온 우주 배경화면 모바일 잠금화면 OLED">
+                    <li class="file-item" data-name="네온 우주 배경화면">
                         <span class="file-name">네온 우주 배경화면</span>
                         <a href="wallpaper1.png" class="btn-sm" download>다운로드</a>
                     </li>
-                    <li class="file-item" data-name="감성 데스크테리어 배경화면 책상 따뜻한">
+                    <li class="file-item" data-name="감성 데스크테리어">
                         <span class="file-name">감성 데스크테리어</span>
                         <a href="wallpaper2.png" class="btn-sm" download>다운로드</a>
                     </li>
                 </ul>
             </div>
-            
-            <div class="card">
-                <h3>💡 참고 자료</h3>
-                <ul class="file-list">
-                    <li class="file-item" data-name="AI 질문 잘하는 법 프롬프트 엔지니어링 꿀팁">
-                        <span class="file-name">AI 질문 잘하는 법</span>
-                        <a href="#" class="btn-sm btn-disabled">보기</a>
-                    </li>
-                </ul>
+        </div>
+        
+        <div style="text-align: center;">
+            <div class="visitor-counter">
+                오늘의 방문자 수: <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fopencontentbank.com&count_bg=%23007BFF&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false" alt="방문자수"/>
             </div>
         </div>
-        <div id="noResult" class="no-result">찾으시는 자료가 없습니다. 다른 검색어를 입력해 보세요!</div>
     </div>
 
     <div class="footer">
@@ -104,31 +110,16 @@
             const filter = input.value.toLowerCase();
             const fileItems = document.getElementsByClassName('file-item');
             const cards = document.getElementsByClassName('card');
-            let hasVisibleItem = false;
-
-            // 각 파일 아이템 확인
+            
             for (let i = 0; i < fileItems.length; i++) {
                 let txtValue = fileItems[i].getAttribute('data-name');
-                if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                    fileItems[i].style.display = "";
-                    hasVisibleItem = true;
-                } else {
-                    fileItems[i].style.display = "none";
-                }
+                fileItems[i].style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
             }
-
-            // 내용이 하나도 없는 카드는 숨기기
+            
             for (let j = 0; j < cards.length; j++) {
-                const visibleFiles = cards[j].querySelectorAll('.file-item[style="display: px;"], .file-item:not([style*="display: none"])');
-                if (visibleFiles.length > 0) {
-                    cards[j].style.display = "";
-                } else {
-                    cards[j].style.display = "none";
-                }
+                const visibleFiles = cards[j].querySelectorAll('.file-item:not([style*="display: none"])');
+                cards[j].style.display = visibleFiles.length > 0 ? "" : "none";
             }
-
-            // 결과 없음 메시지 제어
-            document.getElementById('noResult').style.display = hasVisibleItem ? "none" : "block";
         }
     </script>
 </body>
