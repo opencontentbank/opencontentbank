@@ -5,59 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Content Bank</title>
     <style>
-        body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
-        .hero { background-color: #0056b3; color: white; text-align: center; padding: 60px 20px; }
-        .hero h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .hero p { font-size: 1.2em; font-weight: 300; margin-bottom: 30px; }
-        .search-box { max-width: 600px; margin: 0 auto; display: flex; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
-        .search-box input { flex: 1; padding: 15px 20px; font-size: 1.1em; border: none; outline: none; }
-        .search-box button { padding: 15px 30px; font-size: 1.1em; background-color: #ff9800; color: white; border: none; cursor: pointer; font-weight: bold; }
+        body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
+        .hero { background: linear-gradient(135deg, #0056b3 0%, #00aaff 100%); color: white; text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: 3em; margin-bottom: 10px; letter-spacing: -1px; }
+        .hero p { font-size: 1.2em; opacity: 0.9; margin-bottom: 30px; }
         
-        .category-section { max-width: 1000px; margin: 50px auto; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 0 20px; }
-        .category-card { background: white; width: 280px; padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .category-card h3 { color: #0056b3; font-size: 1.4em; margin-top: 0; }
-        .category-card p { color: #666; font-size: 0.95em; line-height: 1.5; min-height: 45px; }
+        .search-box { max-width: 600px; margin: 0 auto; display: flex; background: white; border-radius: 50px; padding: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .search-box input { flex: 1; border: none; padding: 15px 25px; font-size: 1.1em; border-radius: 50px; outline: none; }
+        .search-box button { background: #ff9800; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .search-box button:hover { background: #e68a00; }
+
+        .container { max-width: 1100px; margin: -40px auto 50px; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        /* 다운로드 버튼 디자인 */
-        .btn-download { display: inline-block; background: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-top: 15px; font-weight: bold; transition: 0.3s; }
-        .btn-download:hover { background: #0056b3; }
+        .card { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 6px solid #0056b3; }
+        .card h3 { margin-top: 0; color: #0056b3; display: flex; align-items: center; gap: 10px; }
+        .card p { color: #666; font-size: 0.95em; line-height: 1.6; margin-bottom: 20px; }
         
-        .footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; margin-top: 50px; }
+        .file-list { list-style: none; padding: 0; margin: 0; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .file-item:last-child { border-bottom: none; }
+        .file-name { font-weight: 500; font-size: 0.95em; }
+        
+        .btn-sm { text-decoration: none; background: #f0f7ff; color: #007bff; padding: 5px 12px; border-radius: 4px; font-size: 0.85em; font-weight: bold; transition: 0.2s; }
+        .btn-sm:hover { background: #007bff; color: white; }
+
+        .footer { text-align: center; padding: 50px; color: #aaa; font-size: 0.9em; }
     </style>
 </head>
 <body>
 
     <div class="hero">
         <h1>📂 Open Content Bank</h1>
-        <p>누구나 쉽게, 무료로 찾아 이용할 수 있는 열린 자료실입니다.</p>
+        <p>누구나 쉽게, 무료로 찾아 이용할 수 있는 열린 자료실</p>
         <div class="search-box">
-            <input type="text" placeholder="어떤 자료를 찾으시나요? (예: 기획서 양식)">
+            <input type="text" placeholder="필요한 자료를 검색해보세요">
             <button>검색</button>
         </div>
     </div>
 
-    <div class="category-section">
-        <div class="category-card">
-            <h3>📄 문서 양식</h3>
-            <p>깔끔한 한 페이지짜리 초간단 프로젝트 기획서 텍스트 양식입니다.</p>
-            <a href="template.txt" class="btn-download" download>기획서 다운로드</a>
-        </div>
-        
-        <div class="category-card">
-            <h3>🖼️ 디자인 소스</h3>
-            <p>스마트폰 OLED 액정에 찰떡인 고화질 네온 우주 배경화면입니다.</p>
-            <a href="wallpaper1.png" class="btn-download" download>배경화면 다운로드</a>
-        </div>
-        
-        <div class="category-card">
-            <h3>💡 참고 자료</h3>
-            <p>작업에 영감을 주거나 참고하기 좋은 자료를 준비 중입니다.</p>
-            <a href="#" class="btn-download" style="background:#ccc;">업데이트 예정</a>
+    <div class="container">
+        <div class="grid">
+            <div class="card">
+                <h3>📄 문서 양식</h3>
+                <p>실무에서 바로 쓰는 깔끔한 양식들</p>
+                <ul class="file-list">
+                    <li class="file-item">
+                        <span class="file-name">프로젝트 기획서 (Txt)</span>
+                        <a href="template.txt" class="btn-sm" download>다운로드</a>
+                    </li>
+                    <li class="file-item">
+                        <span class="file-name">오늘의 할 일 체크리스트</span>
+                        <a href="#" class="btn-sm" style="color:#ccc;">준비중</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>🖼️ 디자인 소스</h3>
+                <p>고퀄리티 배경화면 및 이미지 자료</p>
+                <ul class="file-list">
+                    <li class="file-item">
+                        <span class="file-name">네온 우주 배경화면</span>
+                        <a href="wallpaper1.png" class="btn-sm" download>다운로드</a>
+                    </li>
+                    <li class="file-item">
+                        <span class="file-name">감성 데스크테리어</span>
+                        <a href="wallpaper2.png" class="btn-sm" download>다운로드</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>💡 참고 자료</h3>
+                <p>영감을 주는 팁과 가이드 모음</p>
+                <ul class="file-list">
+                    <li class="file-item">
+                        <span class="file-name">AI 질문 잘하는 법(준비중)</span>
+                        <a href="#" class="btn-sm" style="color:#ccc;">보기</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <div class="footer">
-        © 2026 Open Content Bank. All rights reserved.
+        © 2026 Open Content Bank. Designed with Gemini.
     </div>
 
 </body>
