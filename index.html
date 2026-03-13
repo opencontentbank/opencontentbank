@@ -8,53 +8,38 @@
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
         
-        /* 상단 헤더 */
         .header { background: white; padding: 15px 0; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo-link { text-decoration: none; color: #007bff; font-weight: 900; font-size: 1.5rem; }
 
-        /* 히어로 배경 */
         .hero { background: linear-gradient(135deg, #0056b3 0%, #00aaff 100%); color: white; text-align: center; padding: 40px 20px; }
         .hero h1 { margin: 0; font-size: 2.2em; font-weight: 800; }
-        .hero p { margin: 10px 0 0; opacity: 0.9; }
+        .hero p { margin: 10px 0 20px; opacity: 0.9; }
         
-        /* 메인 레이아웃 (왼쪽 300px, 오른쪽 나머지) */
-        .main-layout { 
-            max-width: 1200px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
-            display: grid; 
-            grid-template-columns: 300px 1fr; 
-            gap: 30px; 
-        }
+        /* 닉네임 설정 버튼 */
+        .btn-nickname { background: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85em; }
+        .btn-nickname:hover { background: white; color: #007bff; }
 
-        /* 모바일 대응 (화면 작아지면 세로로 배치) */
-        @media (max-width: 900px) {
-            .main-layout { grid-template-columns: 1fr; }
-        }
+        .main-layout { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 300px 1fr; gap: 30px; }
 
-        /* 공통 카드 디자인 */
+        @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } }
+
         .card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
         .rank-title { font-size: 1.1em; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         
-        /* 랭킹 리스트 스타일 */
         .rank-list { list-style: none; padding: 0; margin: 0; }
         .rank-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f8f9fa; }
         .rank-item:last-child { border-bottom: none; }
         .rank-number { width: 22px; font-weight: 900; color: #007bff; font-size: 0.9em; }
-        .rank-name { flex: 1; font-size: 0.85em; margin-left: 10px; color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .rank-name { flex: 1; font-size: 0.85em; margin-left: 10px; color: #555; }
         .rank-score { font-size: 0.8em; color: #ff9800; font-weight: bold; background: #fff5e6; padding: 2px 8px; border-radius: 12px; }
 
-        /* 버튼 스타일 */
         .btn-action { width: 100%; padding: 12px; border-radius: 10px; border: none; color: white; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; }
         .btn-action:hover { opacity: 0.9; transform: translateY(-2px); }
 
-        /* 자료실 아이템 스타일 */
         .file-item { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid #f0f0f0; }
-        .file-item:last-child { border-bottom: none; }
         .file-info { font-weight: 600; color: #444; }
-        .btn-sm { text-decoration: none; background: #007bff; color: white; padding: 10px 20px; border-radius: 8px; font-size: 0.85em; font-weight: 700; transition: 0.3s; }
-        .btn-sm:hover { background: #0056b3; box-shadow: 0 4px 10px rgba(0,123,255,0.3); }
-
+        .btn-sm { text-decoration: none; background: #007bff; color: white; padding: 10px 20px; border-radius: 8px; font-size: 0.85em; font-weight: 700; cursor: pointer; }
+        
         .footer { text-align: center; padding: 50px; color: #aaa; font-size: 0.9em; }
     </style>
 </head>
@@ -66,70 +51,115 @@
 
     <div class="hero">
         <h1>🏆 명예의 전당 & 자료실</h1>
-        <p>활동을 통해 랭킹의 주인공이 되어보세요!</p>
+        <p>환영합니다, <span id="display-name">익명</span>님!</p>
+        <button class="btn-nickname" onclick="setNickname()">닉네임 변경</button>
     </div>
 
     <div class="main-layout">
-        
         <aside class="sidebar">
-            
             <div class="card" style="border-top: 4px solid #28a745;">
                 <div class="rank-title" style="color: #28a745;">📅 출석왕 TOP 5</div>
-                <ul class="rank-list">
-                    <li class="rank-item"><span class="rank-number">1</span><span class="rank-name">꾸준함이최고</span><span class="rank-score">52회</span></li>
-                    <li class="rank-item"><span class="rank-number">2</span><span class="rank-name">얼리버드_Lee</span><span class="rank-score">48회</span></li>
-                    <li class="rank-item"><span class="rank-number">3</span><span class="rank-name">출석봇v3</span><span class="rank-score">41회</span></li>
-                    <li class="rank-item"><span class="rank-number">4</span><span class="rank-name">오늘도성공</span><span class="rank-score">39회</span></li>
-                    <li class="rank-item"><span class="rank-number">5</span><span class="rank-name">신규방문자</span><span class="rank-score">5회</span></li>
+                <ul class="rank-list" id="attendance-rank">
+                    <li class="rank-item"><span class="rank-number">1</span><span class="rank-name">불러오는 중...</span><span class="rank-score">0회</span></li>
+                    <li class="rank-item"><span class="rank-number">2</span><span class="rank-name">우등생_A</span><span class="rank-score">45회</span></li>
+                    <li class="rank-item"><span class="rank-number">3</span><span class="rank-name">출석봇</span><span class="rank-score">30회</span></li>
+                    <li class="rank-item"><span class="rank-number">4</span><span class="rank-name">열공중</span><span class="rank-score">25회</span></li>
+                    <li class="rank-item"><span class="rank-number">5</span><span class="rank-name">뉴비</span><span class="rank-score">10회</span></li>
                 </ul>
-                <button class="btn-action" style="background: #28a745;" onclick="alert('오늘의 출석체크가 완료되었습니다!')">오늘의 출석체크</button>
+                <button class="btn-action" style="background: #28a745;" onclick="doAttendance()">오늘의 출석체크</button>
             </div>
 
             <div class="card" style="border-top: 4px solid #ff9800;">
                 <div class="rank-title" style="color: #ff9800;">🔥 다운로드 TOP 5</div>
-                <ul class="rank-list">
-                    <li class="rank-item"><span class="rank-number">1</span><span class="rank-name">자료컬렉터</span><span class="rank-score">142건</span></li>
-                    <li class="rank-item"><span class="rank-number">2</span><span class="rank-name">파일마스터</span><span class="rank-score">120건</span></li>
-                    <li class="rank-item"><span class="rank-number">3</span><span class="rank-name">지식탐구</span><span class="rank-score">95건</span></li>
-                    <li class="rank-item"><span class="rank-number">4</span><span class="rank-name">데이터수집광</span><span class="rank-score">88건</span></li>
-                    <li class="rank-item"><span class="rank-number">5</span><span class="rank-name">배경수집러</span><span class="rank-score">60건</span></li>
+                <ul class="rank-list" id="download-rank">
+                    <li class="rank-item"><span class="rank-number">1</span><span class="rank-name">불러오는 중...</span><span class="rank-score">0건</span></li>
+                    <li class="rank-item"><span class="rank-number">2</span><span class="rank-name">수집가_B</span><span class="rank-score">110건</span></li>
+                    <li class="rank-item"><span class="rank-number">3</span><span class="rank-name">파일헌터</span><span class="rank-score">90건</span></li>
+                    <li class="rank-item"><span class="rank-number">4</span><span class="rank-name">저장매니아</span><span class="rank-score">70건</span></li>
+                    <li class="rank-item"><span class="rank-number">5</span><span class="rank-name">자료광</span><span class="rank-score">50건</span></li>
                 </ul>
-                <p style="font-size: 0.75em; color: #999; margin-top: 15px; text-align: center; line-height: 1.4;">다운로드 버튼 클릭 시<br>랭킹 점수가 자동으로 반영됩니다.</p>
             </div>
         </aside>
 
         <main class="content-area">
             <div class="card">
                 <h3 style="margin-top: 0; color: #007bff;">📁 최신 공유 자료실</h3>
-                <p style="color: #888; font-size: 0.9em; margin-bottom: 25px;">필요한 자료를 무료로 다운로드하고 활동 점수를 쌓으세요.</p>
-                
                 <div class="file-item">
-                    <span class="file-info">📄 프로젝트 기획서 표준 양식 (2026)</span>
-                    <a href="#" class="btn-sm" onclick="alert('다운로드가 시작됩니다. 다운로드 랭킹 점수 +1!')">다운로드</a>
+                    <span class="file-info">📄 프로젝트 기획서 양식</span>
+                    <a class="btn-sm" onclick="doDownload('기획서 양식')">다운로드</a>
                 </div>
-                
                 <div class="file-item">
-                    <span class="file-info">🖼️ 고화질 데스크탑 배경화면 모음</span>
-                    <a href="#" class="btn-sm" onclick="alert('다운로드가 시작됩니다. 다운로드 랭킹 점수 +1!')">다운로드</a>
-                </div>
-                
-                <div class="file-item">
-                    <span class="file-info">📊 실무에 바로 쓰는 엑셀 단축키 시트</span>
-                    <a href="#" class="btn-sm" onclick="alert('다운로드가 시작됩니다. 다운로드 랭킹 점수 +1!')">다운로드</a>
-                </div>
-                
-                <div class="file-item">
-                    <span class="file-info">📝 감성적인 Notion 템플릿 공유</span>
-                    <a href="#" class="btn-sm" onclick="alert('다운로드가 시작됩니다. 다운로드 랭킹 점수 +1!')">다운로드</a>
+                    <span class="file-info">🖼️ 고화질 배경화면 모음</span>
+                    <a class="btn-sm" onclick="doDownload('배경화면 팩')">다운로드</a>
                 </div>
             </div>
         </main>
-
     </div>
 
-    <footer class="footer">
-        © 2026 Open Content Bank. Powered by Gemini.
-    </footer>
+    <script>
+        // --- [로컬 스토리지 로직] ---
 
+        // 1. 데이터 초기화
+        let myData = JSON.parse(localStorage.getItem('myRankData')) || {
+            name: "익명",
+            attendance: 0,
+            downloads: 0,
+            lastVisit: ""
+        };
+
+        // 2. 페이지 로드 시 실행
+        window.onload = function() {
+            updateUI();
+        };
+
+        // 닉네임 설정
+        function setNickname() {
+            const newName = prompt("닉네임을 입력하세요:", myData.name);
+            if(newName && newName.trim() !== "") {
+                myData.name = newName;
+                saveData();
+            }
+        }
+
+        // 출석체크
+        function doAttendance() {
+            const today = new Date().toDateString();
+            if (myData.lastVisit === today) {
+                alert("이미 오늘 출석체크를 하셨습니다!");
+            } else {
+                myData.attendance += 1;
+                myData.lastVisit = today;
+                saveData();
+                alert(`${myData.name}님 출석 완료! (총 ${myData.attendance}회)`);
+            }
+        }
+
+        // 다운로드 기록
+        function doDownload(fileName) {
+            myData.downloads += 1;
+            saveData();
+            alert(`'${fileName}' 다운로드 완료! 누적 ${myData.downloads}건`);
+        }
+
+        // 저장 및 UI 갱신
+        function saveData() {
+            localStorage.setItem('myRankData', JSON.stringify(myData));
+            updateUI();
+        }
+
+        function updateUI() {
+            // 히어로 닉네임 표시
+            document.getElementById('display-name').innerText = myData.name;
+            
+            // 랭킹 리스트의 1등을 '나'의 정보로 강제 업데이트 (서버 연결 전까지)
+            const attendFirst = document.querySelector('#attendance-rank .rank-item:nth-child(1)');
+            attendFirst.querySelector('.rank-name').innerText = myData.name + " (나)";
+            attendFirst.querySelector('.rank-score').innerText = myData.attendance + "회";
+
+            const downFirst = document.querySelector('#download-rank .rank-item:nth-child(1)');
+            downFirst.querySelector('.rank-name').innerText = myData.name + " (나)";
+            downFirst.querySelector('.rank-score').innerText = myData.downloads + "건";
+        }
+    </script>
 </body>
 </html>
