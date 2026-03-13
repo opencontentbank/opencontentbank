@@ -3,61 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="google-site-verification" content="구글코드를여기에">
-    <meta name="naver-site-verification" content="네이버코드를여기에">
-    
     <title>Open Content Bank - 무료 자료 저장소</title>
-    <meta name="description" content="고퀄리티 배경화면, 실무 문서 양식, 꿀팁을 무료로 공유하는 오픈 콘텐츠 뱅크입니다.">
-    
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; overflow-x: hidden; }
         
-        /* 헤더 & 로고 */
+        /* 헤더 */
         .header { background: white; padding: 15px 0; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
         .logo-link { text-decoration: none; color: #007bff; font-weight: 900; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
+        /* 히어로 */
         .hero { background: linear-gradient(135deg, #0056b3 0%, #00aaff 100%); color: white; text-align: center; padding: 60px 20px; }
-        .hero h1 { font-size: 2.8em; margin-bottom: 15px; animation: fadeInUp 0.8s ease; }
+        .hero h1 { font-size: 2.8em; margin-bottom: 15px; }
         
-        /* 검색창 */
-        .search-box { max-width: 600px; margin: 0 auto; display: flex; background: white; border-radius: 50px; padding: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; }
-        .search-box:focus-within { transform: scale(1.03); }
+        /* 검색 */
+        .search-box { max-width: 600px; margin: 0 auto; display: flex; background: white; border-radius: 50px; padding: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .search-box input { flex: 1; border: none; padding: 15px 25px; font-size: 1.1em; border-radius: 50px; outline: none; }
         .search-box button { background: #ff9800; color: white; border: none; padding: 15px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; }
 
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s; animation: fadeInUp 1s ease; }
+        /* 카드 */
+        .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         .card h3 { margin-top: 0; color: #0056b3; display: flex; align-items: center; gap: 10px; }
         
         .file-list { list-style: none; padding: 0; margin: 20px 0 0; }
         .file-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }
         .file-item:last-child { border-bottom: none; }
-        .btn-sm { text-decoration: none; background: #eef6ff; color: #007bff; padding: 8px 18px; border-radius: 8px; font-size: 0.85em; font-weight: 700; transition: 0.3s; }
-        .btn-sm:hover { background: #007bff; color: white; }
+        .btn-sm { text-decoration: none; background: #eef6ff; color: #007bff; padding: 8px 18px; border-radius: 8px; font-size: 0.85em; font-weight: 700; }
 
-        /* 방문자수 표시 박스 */
+        /* 방문자수 표시 구역 */
         .status-section { text-align: center; margin-top: 50px; margin-bottom: 50px; }
         .visitor-box { background: white; padding: 15px 30px; border-radius: 50px; display: inline-flex; align-items: center; gap: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .status-label { color: #888; font-size: 0.8em; display: block; margin-bottom: 5px; font-weight: bold; }
+        
         .footer { text-align: center; padding: 50px; color: #aaa; font-size: 0.9em; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <a href="/" class="logo-link">
-            📂 OPEN CONTENT BANK
-        </a>
+        <a href="/" class="logo-link">📂 OPEN CONTENT BANK</a>
     </header>
 
     <div class="hero">
@@ -80,7 +68,6 @@
                     </li>
                 </ul>
             </div>
-            
             <div class="card">
                 <h3>🖼️ 디자인 소스</h3>
                 <ul class="file-list">
@@ -95,15 +82,17 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="status-section">
             <div class="visitor-box">
-                <div style="text-align: left; border-right: 1px solid #eee; padding-right: 20px;">
-                    <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">TOTAL VISITS</span>
-                    <span id="visit-count" style="color: #007bff; font-weight: 800; font-size: 1.2em;">Loading...</span>
+                <div style="border-right: 1px solid #eee; padding-right: 20px; text-align: left;">
+                    <span class="status-label">TOTAL VISITS</span>
+                    <div id="visit-count">
+                        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fopencontentbank.com&count_bg=%23007BFF&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" alt="Hits">
+                    </div>
                 </div>
                 <div style="text-align: left;">
-                    <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">SERVER STATUS</span>
+                    <span class="status-label">SERVER STATUS</span>
                     <span style="color: #28a745; font-weight: 800; font-size: 1em;">● ONLINE</span>
                 </div>
             </div>
@@ -115,26 +104,20 @@
     </footer>
 
     <script>
-        // 검색 기능
         function filterContents() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
             const fileItems = document.getElementsByClassName('file-item');
             const cards = document.getElementsByClassName('card');
-            
             for (let i = 0; i < fileItems.length; i++) {
                 let txtValue = fileItems[i].getAttribute('data-name');
                 fileItems[i].style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
             }
-            
             for (let j = 0; j < cards.length; j++) {
                 const visibleFiles = cards[j].querySelectorAll('.file-item:not([style*="display: none"])');
                 cards[j].style.display = visibleFiles.length > 0 ? "" : "none";
             }
         }
-
-        // 방문자 카운트 스크립트
-document.getElementById('visit-count').innerHTML = '<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fopencontentbank.com&count_bg=%23007BFF&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" style="vertical-align: middle; height: 25px;">';
     </script>
 </body>
 </html>
