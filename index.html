@@ -16,7 +16,7 @@
         
         /* 헤더 & 로고 */
         .header { background: white; padding: 15px 0; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .logo-img { height: 50px; cursor: pointer; }
+        .logo-link { text-decoration: none; color: #007bff; font-weight: 900; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
         .hero { background: linear-gradient(135deg, #0056b3 0%, #00aaff 100%); color: white; text-align: center; padding: 60px 20px; }
         .hero h1 { font-size: 2.8em; margin-bottom: 15px; animation: fadeInUp 0.8s ease; }
@@ -32,30 +32,33 @@
         
         .card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s; animation: fadeInUp 1s ease; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .card h3 { margin-top: 0; color: #0056b3; display: flex; align-items: center; gap: 10px; }
         
         .file-list { list-style: none; padding: 0; margin: 20px 0 0; }
         .file-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }
+        .file-item:last-child { border-bottom: none; }
         .btn-sm { text-decoration: none; background: #eef6ff; color: #007bff; padding: 8px 18px; border-radius: 8px; font-size: 0.85em; font-weight: 700; transition: 0.3s; }
         .btn-sm:hover { background: #007bff; color: white; }
 
-        /* 방문자수 표시기 */
-        .visitor-counter { margin-top: 50px; padding: 20px; background: #eee; border-radius: 10px; display: inline-block; font-size: 0.9em; color: #666; }
+        /* 방문자수 표시 박스 */
+        .status-section { text-align: center; margin-top: 50px; margin-bottom: 50px; }
+        .visitor-box { background: white; padding: 15px 30px; border-radius: 50px; display: inline-flex; align-items: center; gap: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .footer { text-align: center; padding: 50px; color: #aaa; font-size: 0.9em; }
+        .footer { text-align: center; padding: 50px; color: #aaa; font-size: 0.9em; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <a href="/" style="text-decoration: none; color: #007bff; font-weight: 900; font-size: 1.5rem;">
-        📂 OPEN CONTENT BANK
-    </a>
-</div>
+    <header class="header">
+        <a href="/" class="logo-link">
+            📂 OPEN CONTENT BANK
+        </a>
+    </header>
 
     <div class="hero">
         <h1>나만의 자료 저장소</h1>
@@ -93,51 +96,26 @@
             </div>
         </div>
         
-       <div style="text-align: center; margin-top: 50px;">
-    <div class="visitor-box" style="background: white; padding: 15px 30px; border-radius: 50px; display: inline-flex; align-items: center; gap: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee;">
-        <div style="text-align: left; border-right: 1px solid #eee; padding-right: 20px;">
-            <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">TOTAL VISITS</span>
-            <span id="visit-count" style="color: #007bff; font-weight: 800; font-size: 1.2em;">Loading...</span>
-        </div>
-        <div style="text-align: left;">
-            <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">SERVER STATUS</span>
-            <span style="color: #28a745; font-weight: 800; font-size: 1em;">● ONLINE</span>
-        </div>
-    </div>
-</div>
-
-<script>
-    // 숫자 카운트 API (이미지 없이 텍스트만 불러와서 절대 안 깨짐)
-    fetch('https://api.countapi.xyz/hit/opencontentbank.com/visits')
-        .then(res => res.json())
-        .then(res => {
-            document.getElementById('visit-count').innerText = res.value.toLocaleString();
-        })
-        .catch(() => {
-            // API 응답이 늦을 경우 보여줄 숫자
-            document.getElementById('visit-count').innerText = "1,241"; 
-        });
-</script>
-    fetch('https://api.countapi.xyz/hit/opencontentbank.com/visits')
-        .then(res => res.json())
-        .then(res => {
-            document.getElementById('visit-count').innerText = res.value.toLocaleString();
-        })
-        .catch(() => {
-            document.getElementById('visit-count').innerText = "1,240"; // 오류 시 보여줄 기본 숫자
-        });
-</script>
-    오늘의 방문자 수: 
-    <img src="https://counter.secrethell.site/get/@opencontentbank?style=flat-square&color=blue&label=hits" alt="방문자수" />
-</div>
+        <div class="status-section">
+            <div class="visitor-box">
+                <div style="text-align: left; border-right: 1px solid #eee; padding-right: 20px;">
+                    <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">TOTAL VISITS</span>
+                    <span id="visit-count" style="color: #007bff; font-weight: 800; font-size: 1.2em;">Loading...</span>
+                </div>
+                <div style="text-align: left;">
+                    <span style="color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; font-weight: bold;">SERVER STATUS</span>
+                    <span style="color: #28a745; font-weight: 800; font-size: 1em;">● ONLINE</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="footer">
+    <footer class="footer">
         © 2026 Open Content Bank. Powered by Gemini.
-    </div>
+    </footer>
 
     <script>
+        // 검색 기능
         function filterContents() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
@@ -154,6 +132,16 @@
                 cards[j].style.display = visibleFiles.length > 0 ? "" : "none";
             }
         }
+
+        // 방문자 카운트 스크립트
+        fetch('https://api.countapi.xyz/hit/opencontentbank.com/visits')
+            .then(res => res.json())
+            .then(res => {
+                document.getElementById('visit-count').innerText = res.value.toLocaleString();
+            })
+            .catch(() => {
+                document.getElementById('visit-count').innerText = "1,241"; 
+            });
     </script>
 </body>
 </html>
