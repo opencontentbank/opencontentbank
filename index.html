@@ -1,19 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Content Bank</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f0f2f5; }
-        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; }
-        h1 { color: #007bff; }
+        /* 웹사이트 전체 기본 설정 */
+        body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
+        
+        /* 상단 파란색 대문 영역 */
+        .hero { background-color: #0056b3; color: white; text-align: center; padding: 60px 20px; }
+        .hero h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .hero p { font-size: 1.2em; font-weight: 300; margin-bottom: 30px; }
+        
+        /* 검색창 디자인 */
+        .search-box { max-width: 600px; margin: 0 auto; display: flex; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+        .search-box input { flex: 1; padding: 15px 20px; font-size: 1.1em; border: none; outline: none; }
+        .search-box button { padding: 15px 30px; font-size: 1.1em; background-color: #ff9800; color: white; border: none; cursor: pointer; font-weight: bold; }
+        .search-box button:hover { background-color: #e68a00; }
+
+        /* 카테고리 영역 */
+        .category-section { max-width: 1000px; margin: 50px auto; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 0 20px; }
+        .category-card { background: white; width: 280px; padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; border-top: 5px solid #0056b3; }
+        .category-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .category-card h3 { color: #0056b3; font-size: 1.4em; margin-top: 0; }
+        .category-card p { color: #666; font-size: 0.95em; line-height: 1.5; }
+        
+        /* 하단 카피라이트 */
+        .footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; margin-top: 50px; }
     </style>
 </head>
 <body>
-    <div class="container">
+
+    <div class="hero">
         <h1>📂 Open Content Bank</h1>
-        <p>성공입니다! 이제 <b>opencontentbank.com</b>이 살아 움직입니다.</p>
-        <p>제미나이와 함께 나만의 콘텐츠를 차곡차곡 쌓아보세요.</p>
+        <p>누구나 쉽게, 무료로 찾아 이용할 수 있는 열린 자료실입니다.</p>
+        
+        <div class="search-box">
+            <input type="text" placeholder="어떤 자료를 찾으시나요? (예: 기획서 양식)">
+            <button>검색</button>
+        </div>
     </div>
+
+    <div class="category-section">
+        <div class="category-card">
+            <h3>📄 문서 양식</h3>
+            <p>이력서, 기획서, 보고서 등 바로 다운로드하여 사용할 수 있는 문서 포맷</p>
+        </div>
+        
+        <div class="category-card">
+            <h3>🖼️ 디자인 소스</h3>
+            <p>상업적으로 무료 사용 가능한 고화질 이미지 및 일러스트 자료</p>
+        </div>
+        
+        <div class="category-card">
+            <h3>💡 참고 자료</h3>
+            <p>작업에 영감을 주거나 참고하기 좋은 가이드라인 및 정보 모음</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 Open Content Bank. All rights reserved.
+    </div>
+
 </body>
 </html>
